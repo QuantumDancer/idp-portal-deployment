@@ -1,5 +1,5 @@
-{{- if .Values.httpRoute.enabled -}}
-{{- $fullName := include "idp-portal-deployment.fullname" . -}}
+# yaml-language-server: $schema=https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/gateway.networking.k8s.io/httproute_v1.json
+{{ $fullName := include "idp-portal-deployment.fullname" . -}}
 {{- $svcPort := .Values.service.port -}}
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
@@ -21,18 +21,13 @@ spec:
     {{- toYaml . | nindent 4 }}
   {{- end }}
   rules:
-    {{- range .Values.httpRoute.rules }}
-    {{- with .matches }}
     - matches:
-      {{- toYaml . | nindent 8 }}
-    {{- end }}
-    {{- with .filters }}
-      filters:
-      {{- toYaml . | nindent 8 }}
-    {{- end }}
+      - path:
+          type: PathPrefix
+          value: /
       backendRefs:
-        - name: {{ $fullName }}
+        - group: ""
+          kind: Service
+          name: {{ $fullName }}
           port: {{ $svcPort }}
           weight: 1
-    {{- end }}
-{{- end }}

@@ -23,15 +23,9 @@ spec:
         {{- toYaml . | nindent 8 }}
         {{- end }}
     spec:
-      {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+        - name: {{ include "idp-portal-deployment.fullname" . }}-image-pull-secret
       serviceAccountName: {{ include "idp-portal-deployment.serviceAccountName" . }}
-      {{- with .Values.podSecurityContext }}
-      securityContext:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           {{- with .Values.securityContext }}
@@ -44,6 +38,16 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
+          env:
+            - name: POSTGRES_HOST
+              value: {{ .Values.postgresql.host }}
+            - name: POSTGRES_PORT
+              value: {{ .Values.postgresql.port | quote }}
+          envFrom:
+            - secretRef:
+                name: {{ include "idp-portal-deployment.fullname" . }}-postgres-secret
+            - secretRef:
+                name: {{ include "idp-portal-deployment.fullname" . }}-backstage-secrets
           {{- with .Values.livenessProbe }}
           livenessProbe:
             {{- toYaml . | nindent 12 }}
