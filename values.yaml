@@ -14,6 +14,8 @@ postgresql:
   host: backstage-database-cluster-rw.backstage-database.svc.cluster.local
   port: 5432
 
+domain: backstage.k8s.home.rottlr.de
+
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""

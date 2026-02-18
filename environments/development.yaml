@@ -2,3 +2,5 @@ replicaCount: 2
 
 image:
   tag: latest
+
+domain: backstage.dev.idp.rottlr.de

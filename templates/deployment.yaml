@@ -43,6 +43,8 @@ spec:
               value: {{ .Values.postgresql.host }}
             - name: POSTGRES_PORT
               value: {{ .Values.postgresql.port | quote }}
+            - name: BASE_URL
+              value: https://{{ .Values.domain }}
           envFrom:
             - secretRef:
                 name: {{ include "idp-portal-deployment.fullname" . }}-postgres-secret

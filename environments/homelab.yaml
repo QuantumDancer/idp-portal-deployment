@@ -1,2 +1,4 @@
 image:
-  tag: latest
+  tag: 00e4c5f1
+
+domain: backstage.k8s.home.rottlr.de
