@@ -1,3 +1,10 @@
 image:
   tag: 162d8c32
 domain: backstage.k8s.home.rottlr.de
+
+resources:
+  limits:
+    memory: 1Gi
+  requests:
+    cpu: 100m
+    memory: 512Mi
