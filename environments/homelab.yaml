@@ -1,5 +1,5 @@
 image:
-  tag: "88108034"
+  tag: "42cf2f64"
 domain: backstage.k8s.home.rottlr.de
 resources:
   limits:
