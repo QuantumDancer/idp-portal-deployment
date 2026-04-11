@@ -1,7 +1,6 @@
 image:
-  tag: 162d8c32
+  tag: "88108034"
 domain: backstage.k8s.home.rottlr.de
-
 resources:
   limits:
     memory: 1Gi
