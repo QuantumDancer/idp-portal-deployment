@@ -1,4 +1,4 @@
 replicaCount: 2
 image:
-  tag: 861ec017
+  tag: 65b76553
 domain: backstage.dev.idp.rottlr.de
