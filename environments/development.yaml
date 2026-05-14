@@ -2,3 +2,9 @@ replicaCount: 2
 image:
   tag: 65b76553
 domain: backstage.dev.idp.rottlr.de
+techdocs:
+  s3:
+    bucket: # TODO: Set via Terraform
+    region: eu-central-1
+    endpoint: https://s3.eu-central-1.amazonaws.com
+    forcePathStyle: false

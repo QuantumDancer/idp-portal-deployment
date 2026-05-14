@@ -7,3 +7,9 @@ resources:
   requests:
     cpu: 100m
     memory: 512Mi
+techdocs:
+  s3:
+    bucket: techdocs
+    region: garage
+    endpoint: https://s3.garage.k8s.home.rottlr.de
+    forcePathStyle: true

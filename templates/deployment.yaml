@@ -45,6 +45,14 @@ spec:
               value: {{ .Values.postgresql.port | quote }}
             - name: BASE_URL
               value: https://{{ .Values.domain }}
+            - name: TECHDOCS_S3_BUCKET
+              value: {{ .Values.techdocs.s3.bucket | quote }}
+            - name: TECHDOCS_S3_REGION
+              value: {{ .Values.techdocs.s3.region | quote }}
+            - name: TECHDOCS_S3_ENDPOINT
+              value: {{ .Values.techdocs.s3.endpoint | quote }}
+            - name: TECHDOCS_S3_FORCE_PATH_STYLE
+              value: {{ .Values.techdocs.s3.forcePathStyle | quote }}
           envFrom:
             - secretRef:
                 name: {{ include "idp-portal-deployment.fullname" . }}-postgres-secret
