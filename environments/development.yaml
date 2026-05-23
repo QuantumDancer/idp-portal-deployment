@@ -1,6 +1,6 @@
 replicaCount: 2
 image:
-  tag: 65b76553
+  tag: 9fb3640d
 domain: backstage.dev.idp.rottlr.de
 techdocs:
   s3:
