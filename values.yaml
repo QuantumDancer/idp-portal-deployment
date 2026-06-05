@@ -107,3 +107,8 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+otel:
+  enabled: true
+  endpoint: "http://k8s-monitoring-alloy-receiver.k8s-monitoring.svc.cluster.local:4317"
+  serviceName: "backstage"

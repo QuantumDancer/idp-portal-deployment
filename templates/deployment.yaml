@@ -53,6 +53,12 @@ spec:
               value: {{ .Values.techdocs.s3.endpoint | quote }}
             - name: TECHDOCS_S3_FORCE_PATH_STYLE
               value: {{ .Values.techdocs.s3.forcePathStyle | quote }}
+            {{- if .Values.otel.enabled }}
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: {{ .Values.otel.endpoint | quote }}
+            - name: OTEL_SERVICE_NAME
+              value: {{ .Values.otel.serviceName | default "backstage" | quote }}
+            {{- end }}
           envFrom:
             - secretRef:
                 name: {{ include "idp-portal-deployment.fullname" . }}-postgres-secret
