@@ -1,0 +1,22 @@
+{{- if .Values.techdocs.garage.enabled }}
+# TechDocs bucket, provisioned by the garage-operator and granted to the techdocs key.
+apiVersion: garage.rottler.io/v1alpha1
+kind: GarageBucket
+metadata:
+  name: techdocs
+  labels:
+    {{- include "idp-portal-deployment.labels" . | nindent 4 }}
+spec:
+  clusterRef:
+    name: {{ .Values.techdocs.garage.clusterRef.name }}
+    namespace: {{ .Values.techdocs.garage.clusterRef.namespace }}
+  globalAliases:
+    - {{ .Values.techdocs.s3.bucket | quote }}
+  grants:
+    - keyRef:
+        name: techdocs
+      read: true
+      write: true
+  # Keep the bucket (and its docs) if the CR is ever removed.
+  deletionPolicy: Retain
+{{- end }}

@@ -13,3 +13,5 @@ techdocs:
     region: garage
     endpoint: https://s3.garage.k8s.home.rottlr.de
     forcePathStyle: true
+  garage:
+    enabled: true

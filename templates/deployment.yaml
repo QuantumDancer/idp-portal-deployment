@@ -53,6 +53,20 @@ spec:
               value: {{ .Values.techdocs.s3.endpoint | quote }}
             - name: TECHDOCS_S3_FORCE_PATH_STYLE
               value: {{ .Values.techdocs.s3.forcePathStyle | quote }}
+            {{- if .Values.techdocs.garage.enabled }}
+            # Credentials provisioned by the garage-operator GarageKey. Declared as explicit
+            # env (not envFrom) so they take precedence over any AWS_* keys in the Vault secret.
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.techdocs.garage.credentialsSecret }}
+                  key: accessKeyId
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.techdocs.garage.credentialsSecret }}
+                  key: secretAccessKey
+            {{- end }}
             {{- if .Values.otel.enabled }}
             - name: OTEL_EXPORTER_OTLP_ENDPOINT
               value: {{ .Values.otel.endpoint | quote }}

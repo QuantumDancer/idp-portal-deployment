@@ -1,0 +1,19 @@
+{{- if .Values.techdocs.garage.enabled }}
+# S3 credentials for TechDocs, provisioned by the garage-operator.
+# The key controller publishes accessKeyId / secretAccessKey into the output Secret.
+apiVersion: garage.rottler.io/v1alpha1
+kind: GarageKey
+metadata:
+  name: techdocs
+  labels:
+    {{- include "idp-portal-deployment.labels" . | nindent 4 }}
+spec:
+  clusterRef:
+    name: {{ .Values.techdocs.garage.clusterRef.name }}
+    namespace: {{ .Values.techdocs.garage.clusterRef.namespace }}
+  permissions:
+    createBucket: false
+  output:
+    secretName: {{ .Values.techdocs.garage.credentialsSecret }}
+  deletionPolicy: Delete
+{{- end }}

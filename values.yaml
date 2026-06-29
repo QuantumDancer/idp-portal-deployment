@@ -20,6 +20,16 @@ techdocs:
     region: ""
     endpoint: ""
     forcePathStyle: false
+  # When enabled, provision the TechDocs bucket + access key via garage-operator CRs
+  # (GarageBucket / GarageKey) and inject the generated credentials as
+  # AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY. Use this instead of Vault-supplied keys.
+  garage:
+    enabled: false
+    clusterRef:
+      name: garage
+      namespace: garage
+    # Secret (in this namespace) the GarageKey publishes credentials into.
+    credentialsSecret: techdocs-credentials
 
 domain: backstage.k8s.home.rottlr.de
 
