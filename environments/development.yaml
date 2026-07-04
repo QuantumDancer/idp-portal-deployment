@@ -2,9 +2,13 @@ replicaCount: 2
 image:
   tag: 9fb3640d
 domain: backstage.dev.idp.rottlr.de
+# Must match the Pod Identity association in terraform-aws-infra
+# (modules/bootstrap/backstage_techdocs.tf), which grants this ServiceAccount S3 access.
+serviceAccount:
+  name: backstage
 techdocs:
   s3:
-    bucket: # TODO: Set via Terraform
+    bucket: idp-backstage-techdocs-dev
     region: eu-central-1
     endpoint: https://s3.eu-central-1.amazonaws.com
     forcePathStyle: false
