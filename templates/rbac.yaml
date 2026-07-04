@@ -42,6 +42,12 @@ rules:
     resources:
       - ingresses
     verbs: [get, list, watch]
+  # WebService/Worker XRs expose via Gateway API HTTPRoute, not Ingress;
+  # the Backstage k8s plugin needs read access to surface those routes.
+  - apiGroups: [gateway.networking.k8s.io]
+    resources:
+      - httproutes
+    verbs: [get, list, watch]
   - apiGroups: [batch]
     resources:
       - jobs
